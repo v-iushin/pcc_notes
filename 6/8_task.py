@@ -219,7 +219,7 @@ for city, job_counts in job_counter.items():
 # 	"city_2": {"oldest": name_2, "jobs": [job_3, job_4, ...]}
 # 	...
 # }
-# OLDEST, if tie, then alphabetically
+# OLDEST, if tie, then alphabetically last
 # JOBS, sorted list of unique jobs
 #!
 #
@@ -238,8 +238,8 @@ for c in cities:
     #print(elite[c])
 
 for c in cities:
-    oldest = "_"
-    age = 0
+    oldest = None
+    age = -1
     for p in people:
         if c == p["city"]:
             if p["age"] > age:
