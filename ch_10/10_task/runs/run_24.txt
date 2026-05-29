@@ -1,2 +1,2 @@
-omega = 2.59 	 gamma = 0.09 	 theta_0 = 0.8
+omega = 2.71 	 gamma = 0.12 	 theta_0 = 0.56
 time 	 angle

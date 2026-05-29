@@ -21,28 +21,26 @@ def generate_data():
             draw2 = r.randint(1, 5)
             if draw2 == 1:      # missing header
                 run_file.write_text(f"time \t angle\n")
+            elif draw2 == 2:    # empty file
+                    run_file.write_text("")
         with run_file.open("a") as rf:
             for t in range(101):
                 t_step = t / 10
                 theta = THETA_0 * math.exp(-GAMMA * t_step) * math.cos(OMEGA * t_step)
                 theta = round(theta, 2)
                 if draw2 == 2:      # empty file
-                    run_file.write_text("")
                     break
                 if draw2 == 3:    # zero data
                     continue
                 if draw2 == 4:    # non-numeric data
-                    draw3 = r.randint(1, 10)
-                    draw4 = r.randint(1, 10)
-                    if draw3 == 1:
+                    if r.randint(1, 10) == 1:
                         t_step = "ERR"
-                    if draw4 == 1:
+                    if r.randint(1, 10) == 1:
                         theta = "ERR"
                 elif draw2 == 5:    # truncated row
-                    draw5 = r.randint(1, 10)
-                    if draw5 == 1:
+                    if r.randint(1, 10) == 1:
                         rf.write(f"{t_step}\n")
                         continue
                 rf.write(f"{t_step} \t {theta}\n")
         
-#generate_data("runs")
+#generate_data()
