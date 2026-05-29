@@ -12,3 +12,9 @@
 # 
 # 3. results
 #   resume and errors log
+
+
+
+from generate_data import *
+
+generate_data()
