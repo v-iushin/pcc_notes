@@ -7,9 +7,9 @@ import random as r
 
 def generate_data():
     BASE = Path(__file__).parent
-    runs_dir = Path(BASE/"runs")
+    runs_dir = BASE/"runs"
     runs_dir.mkdir(exist_ok=True)
-    for i in range(31):
+    for i in range(51):
         OMEGA = round(r.uniform(2.5, 3.5), 2)
         GAMMA = round(r.uniform(0.05, 0.15), 2)
         THETA_0 = round(r.uniform(0.5, 1), 2)
@@ -21,18 +21,18 @@ def generate_data():
             draw2 = r.randint(1, 5)
             if draw2 == 1:      # missing header
                 run_file.write_text(f"time \t angle\n")
-            elif draw2 == 2:    # empty file
+            elif draw2 == 2:    # empty file (1)
                     run_file.write_text("")
         with run_file.open("a") as rf:
             for t in range(101):
                 t_step = t / 10
                 theta = THETA_0 * math.exp(-GAMMA * t_step) * math.cos(OMEGA * t_step)
                 theta = round(theta, 2)
-                if draw2 == 2:      # empty file
+                if draw2 == 2:      # empty file (2)
                     break
-                if draw2 == 3:    # zero data
+                if draw2 == 3:      # zero data
                     continue
-                if draw2 == 4:    # non-numeric data
+                if draw2 == 4:      # non-numeric data
                     if r.randint(1, 10) == 1:
                         t_step = "ERR"
                     if r.randint(1, 10) == 1:
