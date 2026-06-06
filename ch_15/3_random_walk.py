@@ -13,7 +13,7 @@ class RandomWalk:
         self.y_values = [0]
     
     def fill_walk(self):
-        """Calculate all points in hte walk."""
+        """Calculate all points in the walk."""
         # Keep taking steps until the walk reaches the desired length.
         while len(self.x_values) < self.num_points:
             # Decide which direction to go, and how far to go.
@@ -62,5 +62,3 @@ while True:
     keep_running = input("Make another walk? (y/n): ")
     if keep_running == "n":
         break
-
-# pdf 355
