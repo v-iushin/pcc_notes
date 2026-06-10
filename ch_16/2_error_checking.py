@@ -1,8 +1,4 @@
-# DOWNLOADING DATA
-
-# CSV FORMAT
-
-# comma-separeted values
+# ERROR CHECKING
 
 from pathlib import Path
 import csv
@@ -12,8 +8,7 @@ from datetime import datetime
 import matplotlib.pyplot as plt
 
 BASE = Path(__file__).parent
-#path = BASE/"weather_data/sitka_weather_07-2021_simple.csv"
-path = BASE/"weather_data/sitka_weather_2021_simple.csv"
+path = BASE/"weather_data/death_valley_2021_simple.csv"
 lines = path.read_text().splitlines()
 
 reader = csv.reader(lines)
@@ -31,11 +26,15 @@ print(high_index, low_index)
 dates, highs, lows = [], [], []
 for row in reader:
     current_date = datetime.strptime(row[2], "%Y-%m-%d")
-    high = int(row[high_index])
-    low = int(row[low_index])
-    dates.append(current_date)
-    highs.append(high)
-    lows.append(low)
+    try:
+        high = int(row[high_index])
+        low = int(row[low_index])
+    except ValueError:
+        print(f"Missing data for {current_date}")
+    else:
+        dates.append(current_date)
+        highs.append(high)
+        lows.append(low)
 
 # Plot the high and low temperatures.
 plt.style.use("seaborn-v0_8-whitegrid")
@@ -46,7 +45,8 @@ ax.plot(dates, lows, color="blue", alpha=0.5)
 ax.fill_between(dates, highs, lows, facecolor="blue", alpha=0.1)
 
 # Format plot.
-ax.set_title("Daily High and Low Temperatures, 2021", fontsize=24)
+title = "Daily High and Low Temperatures, 2021\nDeath Valley, CA"
+ax.set_title(title, fontsize=20)
 ax.set_xlabel("", fontsize=16)
 fig.autofmt_xdate()
 ax.set_ylabel("Temperature (F)", fontsize=16)
